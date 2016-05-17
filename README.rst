@@ -8,4 +8,5 @@ flags as the default compilation flags for Arch Linux packages.
 
 Requirements
 ------------
+- gcc
 - git
