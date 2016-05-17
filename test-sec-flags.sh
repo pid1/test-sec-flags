@@ -68,3 +68,29 @@ bash -c './Run' &> test6.txt
 echo -e "Test 6 completed."
 make clean
 
+
+echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
+sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' Makefile
+make || exit
+echo -e "Compilation finished, running test 2"
+bash -c './Run' &> test7.txt
+echo -e "Test 7 completed."
+make clean
+
+
+echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
+sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' Makefile
+make || exit
+echo -e "Compilation finished, running test 2"
+bash -c './Run' &> test7.txt
+echo -e "Test 7 completed."
+make clean
+
+
+echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
+sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' Makefile
+make || exit
+echo -e "Compilation finished, running test 2"
+bash -c './Run' &> test8.txt
+echo -e "Test 8 completed."
+make clean
