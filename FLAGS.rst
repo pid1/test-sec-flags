@@ -11,6 +11,6 @@ LDFLAGS= -z,relro
 
 Proposed
 --------
--fstack-protector-strong and partial relro + PIE
--fstack-protector-strong and PIE + full RELRO
--fstack-protector-strong and PIE + full RELRO + no-plt
+- -fstack-protector-strong and partial relro + PIE
+- -fstack-protector-strong and PIE + full RELRO
+- -fstack-protector-strong and PIE + full RELRO + no-plt
