@@ -14,4 +14,4 @@ fi
 cd "$localdir"/UnixBench
 
 echo -e "Compiling with -fstack-check" 
-sed -i '/^CFLAGS = -Wall -pedantic/ s/$/ -fstack-check' Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-check' Makefile
