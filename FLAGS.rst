@@ -10,6 +10,8 @@ makepkg.conf already defines the following:
 - CXXFLAGS= -fstack-protector-strong
 - LDFLAGS= -z,relro
 
+All tests will include -D_FORTIFY_SOURCE=2
+
 Proposed
 --------
 - -fstack-protector-strong and partial relro + PIE
