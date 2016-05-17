@@ -13,5 +13,9 @@ fi
 
 cd "$localdir"/UnixBench
 
-echo -e "Compiling with -fstack-check" 
-sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-check' Makefile
+echo -e "Compiling with -fstack-protector-string and partial relro" 
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2' Makefile
+make || exit
+./Run |& testresults-fstack-relropartial.txt
+make clean
+
