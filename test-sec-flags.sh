@@ -34,7 +34,7 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' Makefile
+sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
 make || exit
 echo -e "Compilation finished, running test 3"
 bash -c './Run' &> test3.txt
