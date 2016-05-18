@@ -45,7 +45,7 @@ make clean
 echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
 sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' Makefile
 make || exit
-echo -e "Compilation finished, running test 2"
+echo -e "Compilation finished, running test 4"
 bash -c './Run' &> test4.txt
 echo -e "Test 4 completed."
 make clean
@@ -54,7 +54,7 @@ make clean
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
 make || exit
-echo -e "Compilation finished, running test 2"
+echo -e "Compilation finished, running test 5"
 bash -c './Run' &> test5.txt
 echo -e "Test 5 completed."
 make clean
@@ -63,7 +63,7 @@ make clean
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
 sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' Makefile
 make || exit
-echo -e "Compilation finished, running test 2"
+echo -e "Compilation finished, running test 6"
 bash -c './Run' &> test6.txt
 echo -e "Test 6 completed."
 make clean
@@ -72,7 +72,7 @@ make clean
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
 sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' Makefile
 make || exit
-echo -e "Compilation finished, running test 2"
+echo -e "Compilation finished, running test 7"
 bash -c './Run' &> test7.txt
 echo -e "Test 7 completed."
 make clean
@@ -81,7 +81,7 @@ make clean
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
 sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' Makefile
 make || exit
-echo -e "Compilation finished, running test 2"
+echo -e "Compilation finished, running test 8"
 bash -c './Run' &> test8.txt
 echo -e "Test 8 completed."
 make clean
