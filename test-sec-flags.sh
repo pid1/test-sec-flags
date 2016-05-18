@@ -14,6 +14,7 @@ fi
 cd "$localdir"/UnixBench
 
 echo -e "Compiling with -fstack-protector-strong and partial relro"
+git checkout Makefile
 sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2' Makefile
 make || exit
 # result destination folders are hardcoded in Run. We should sed in new paths
@@ -25,7 +26,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, partial relro, and -fstack-check"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' Makefile
 make || exit
 echo -e "Compilation finished, running test 2"
 bash -c './Run' &> test2.txt
@@ -34,7 +36,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
 make || exit
 echo -e "Compilation finished, running test 3"
 bash -c './Run' &> test3.txt
@@ -43,7 +46,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' Makefile
 make || exit
 echo -e "Compilation finished, running test 4"
 bash -c './Run' &> test4.txt
@@ -52,7 +56,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' Makefile
 make || exit
 echo -e "Compilation finished, running test 5"
 bash -c './Run' &> test5.txt
@@ -61,7 +66,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' Makefile
 make || exit
 echo -e "Compilation finished, running test 6"
 bash -c './Run' &> test6.txt
@@ -70,7 +76,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' Makefile
 make || exit
 echo -e "Compilation finished, running test 7"
 bash -c './Run' &> test7.txt
@@ -79,7 +86,8 @@ make clean
 
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
-sed -i '/^CFLAGS = -z,relro/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' Makefile
+git checkout Makefile
+sed -i '/^CFLAGS = -Wall -pedantic/c\CFLAGS = -z,relro,-z,now -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' Makefile
 make || exit
 echo -e "Compilation finished, running test 8"
 bash -c './Run' &> test8.txt
