@@ -10,3 +10,10 @@ Requirements
 ------------
 - gcc
 - git
+
+Optional Requirements
+---------------------
+For plotting with plot.py
+- python
+- matplotlib
+- numpy
