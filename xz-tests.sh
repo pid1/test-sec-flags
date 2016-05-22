@@ -2,6 +2,9 @@
 
 set -e
 
+basedir=`pwd`
+results="$basedir/xz-results.txt"
+
 xzurl='http://tukaani.org/xz/xz-5.2.2.tar.gz'
 xzfile='xz-5.2.2.tar.gz'
 localdir='xz-5.2.2'
@@ -32,7 +35,7 @@ sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
 echo -e 'Downloading linux source files...'
 curl -O 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.xz'
 echo -e 'Decompressing the Linux source...'
-xz --decompress 'linux-4.6.tar.xz'
+xz --decompress -k 'linux-4.6.tar.xz'
 
 echo -e 'Compiling with -fstack-protector-strong and partial relro'
 make clean
@@ -40,8 +43,8 @@ CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2' make
 # result destination folders are hardcoded in Run. We should sed in new paths
 # instead of doing this nonsense
 echo -e "Compilation finished, running test 1"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test1.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test1.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results 
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 1 completed."
 
 
@@ -49,8 +52,8 @@ echo -e "Compiling with -fstack-protector-strong, partial relro, and -fstack-che
 make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' make
 echo -e "Compilation finished, running test 2"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test2.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test2.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 2 completed."
 
 
@@ -58,8 +61,8 @@ echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
 make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
 echo -e "Compilation finished, running test 3"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test3.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test3.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 3 completed."
 
 
@@ -67,8 +70,8 @@ echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstac
 make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' make
 echo -e "Compilation finished, running test 4"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test4.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test4.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $reesults
 echo -e "Test 4 completed."
 
 
@@ -76,8 +79,8 @@ echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
 echo -e "Compilation finished, running test 5"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test5.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test5.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 5 completed."
 
 
@@ -85,8 +88,8 @@ echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check
 make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' make
 echo -e "Compilation finished, running test 6"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test6.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test6.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 6 completed."
 
 
@@ -94,8 +97,8 @@ echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
 make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' make
 echo -e "Compilation finished, running test 7"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test7.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test7.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 7 completed."
 
 
@@ -103,6 +106,6 @@ echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and
 make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' make
 echo -e "Compilation finished, running test 8"
-bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test8.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test8.txt
+bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 echo -e "Test 8 completed."

@@ -11,7 +11,7 @@ Requirements
 
 - git, plus one of the following:
 
-For the Unixbench test (easiest):
+For the unixbench and xz tests (easiest):
 
 -gcc
 
@@ -24,13 +24,11 @@ For plotting with plot.py:
 Usage
 -----
 
-For the Unixbench tests:
-
 1. Download: ``git clone https://github.com/pid1/test-sec-flags.git``
 2. cd into the project directory: ``cd test-sec-flags``
-3. Set permissions on the script: ``chmod +x unixbench-test.sh``
-4. Run the script: ``./unixbench-test.sh``
+3. Set permissions on the script: ``chmod +x <foo>-tests.sh``
+4. Run the script: ``./<foo>-tests.sh``
 
-All of the results will be output to test1.txt, test2.txt, and so on inside of the unixbench/UnixBench directory. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
+All of the results will be output to test1.txt, test2.txt, and so on inside of a directory. This will be organized and made easier soon. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
 
-To plot your results, compile the system summaries as per the formats in ``datasets/<user>_[<device].txt`` and run ``python plot.py datasets/<foo>.txt`` from the project directory.
+To plot your results, compile the system summaries as per the formats in ``datasets/<user>[_<device].txt`` and run ``python plot.py <results file>``.
