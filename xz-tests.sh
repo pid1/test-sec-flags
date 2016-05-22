@@ -32,10 +32,23 @@ cd src/xz
 sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
 
 # download something to compress
-echo -e 'Downloading linux source files...'
-curl -O 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.xz'
-echo -e 'Decompressing the Linux source...'
-xz --decompress -k 'linux-4.6.tar.xz'
+if [ ! -f 'linux-4.6.tar.xz' ]
+    then
+        echo -e 'Downloading Linux source files...'
+        curl -O 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.xz'
+        echo -e "Downloading Linux source files..."
+    else
+        echo -e "Linux already downloaded. Continuing..."
+fi
+
+if [ ! -f 'linux-4.6.tar' ]
+    then
+        echo -e 'Decompressing the Linux source...'
+        xz --decompress -k 'linux-4.6.tar.xz'
+    else
+        echo -e "Source files already decompressed. Continuing..."
+fi
+
 
 echo -e 'Compiling with -fstack-protector-strong and partial relro'
 make clean
