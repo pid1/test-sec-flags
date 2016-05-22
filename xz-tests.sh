@@ -41,7 +41,7 @@ CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2' make
 # instead of doing this nonsense
 echo -e "Compilation finished, running test 1"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test1.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test1.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test1.txt
 echo -e "Test 1 completed."
 
 
@@ -50,7 +50,7 @@ make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' make
 echo -e "Compilation finished, running test 2"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test2.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test2.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test2.txt
 echo -e "Test 2 completed."
 
 
@@ -59,7 +59,7 @@ make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
 echo -e "Compilation finished, running test 3"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test3.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test3.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test3.txt
 echo -e "Test 3 completed."
 
 
@@ -68,7 +68,7 @@ make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' make
 echo -e "Compilation finished, running test 4"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test4.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test4.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test4.txt
 echo -e "Test 4 completed."
 
 
@@ -77,7 +77,7 @@ make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
 echo -e "Compilation finished, running test 5"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test5.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test5.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test5.txt
 echo -e "Test 5 completed."
 
 
@@ -86,7 +86,7 @@ make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' make
 echo -e "Compilation finished, running test 6"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test6.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test6.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test6.txt
 echo -e "Test 6 completed."
 
 
@@ -95,7 +95,7 @@ make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' make
 echo -e "Compilation finished, running test 7"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test7.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test7.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test7.txt
 echo -e "Test 7 completed."
 
 
@@ -104,5 +104,5 @@ make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' make
 echo -e "Compilation finished, running test 8"
 bash -c 'time ./xz --compress --stdout linux-4.6.tar > /dev/null' |& tee test8.txt
-bash -c 'time ./xz --decompress --stdout linux-4.6.tar > /dev/null' |& tee test8.txt
+bash -c 'time ./xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a test8.txt
 echo -e "Test 8 completed."
