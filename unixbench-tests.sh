@@ -13,7 +13,7 @@ if [ ! -d "$localdir" ]
         echo -e "Unixbench has already been cloned. Continuing..."
 fi
 
-cd "$localdir"/UnixBench || exit
+cd "$localdir"/UnixBench
 
 # reset Makefile and patch CFLAGS to append project specific things
 # this makes it lot easier to pass test specific flags
