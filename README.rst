@@ -21,10 +21,13 @@ For plotting with plot.py:
 
 Usage
 -----
+
+For the Unixbench tests:
+
 1. Download: ``git clone https://github.com/pid1/test-sec-flags.git``
 2. cd into the project directory: ``cd test-sec-flags``
-3. Set permissions on the script: ``chmod +x test-sec-flags.sh``
-4. Run the script: ``./test-sec-flags.sh``
+3. Set permissions on the script: ``chmod +x unixbench-test.sh``
+4. Run the script: ``./unixbench-test.sh``
 
 All of the results will be output to test1.txt, test2.txt, and so on inside of the unixbench/UnixBench directory. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
 
