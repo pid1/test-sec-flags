@@ -13,7 +13,8 @@ Requirements
 
 Optional Requirements
 ---------------------
-For plotting with plot.py
+For plotting with plot.py:
+
 - python
 - matplotlib
 - numpy
