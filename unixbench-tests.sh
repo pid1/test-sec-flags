@@ -29,40 +29,6 @@ cd "$localdir"/UnixBench
 git checkout Makefile
 sed 's/^CFLAGS =/CFLAGS +=/g' -i Makefile
 
-echo -e "Compiling with -fstack-protector-strong and partial relro"
-make clean
-CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2' make
-# result destination folders are hardcoded in Run. We should sed in new paths
-# instead of doing this nonsense
-echo -e "Compilation finished, running test 1"
-bash -c './Run' &>> $results
-echo -e "Test 1 completed."
-
-
-echo -e "Compiling with -fstack-protector-strong, partial relro, and -fstack-check"
-make clean
-CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' make
-echo -e "Compilation finished, running test 2"
-bash -c './Run' &>> $results
-echo -e "Test 2 completed."
-
-
-echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-make clean
-CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
-echo -e "Compilation finished, running test 3"
-bash -c './Run' &>> $results
-echo -e "Test 3 completed."
-
-
-echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
-make clean
-CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -pie -fPIE' make
-echo -e "Compilation finished, running test 4"
-bash -c './Run' &>> $results
-echo -e "Test 4 completed."
-
-
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 make clean
 CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make

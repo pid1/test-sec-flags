@@ -28,7 +28,10 @@ cd "$localdir"
 echo -e "running ./configure"
 ./configure
 
-sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile debug/Makefile dos/Makefile lib/Makefile po/Makefile src/Makefile tests/Makefile
+sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
+
+sed 's/^LDFLAGS =/LDFLAGS += /g' -i Makefile
+
 
 # download something to compress
 if [ ! -f 'linux-4.6.tar.xz' ]
@@ -89,7 +92,8 @@ echo -e "Test 4 completed."
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 make clean
-CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
+LDFLAGS='-Wl,-z,now'
+CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
 echo -e "Compilation finished, running test 5"
 bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -98,7 +102,8 @@ echo -e "Test 5 completed."
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
 make clean
-CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' make
+LDFLAGS='-Wl,-z,now'
+CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fstack-check' make
 echo -e "Compilation finished, running test 6"
 bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -107,7 +112,8 @@ echo -e "Test 6 completed."
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
 make clean
-CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' make
+LDFLAGS='-Wl,-z,now'
+CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt' make
 echo -e "Compilation finished, running test 7"
 bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -116,7 +122,8 @@ echo -e "Test 7 completed."
 
 echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
 make clean
-CFLAGS='-Wl,-z,relro,-z,now -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' make
+LDFLAGS='-Wl,-z,now'
+CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE -fno-plt -fstack-check' make
 echo -e "Compilation finished, running test 8"
 bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
