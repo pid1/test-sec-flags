@@ -18,27 +18,32 @@ if [ ! -d "$localdir" ]
     then
         tar -xzvf "$xzfile"
     else
-        echo -e "xz alreday extracted. Continuing..."
+        echo -e "xz already extracted. Continuing..."
 fi
 
 cd "$localdir"
 echo -e "running ./configure"
 ./configure
 
-git checkout src/xz/Makefile
+cd src/xz
 sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
 
 # download something to compress
-if [ ! -f 'linux-4.6.tar' ]
+if [ ! -f 'linux-4.6.tar.xz' ]
     then
-        echo -e "Downloading linux source files..."
+        echo -e 'Downloading linux source files...'
         curl -O 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.xz'
-        xz -d 'linux-4.6.tar.xz'
     else
-        echo -e "linux source files already downloaded. Continuing..."
+        echo -e 'Linux source files already downloaded. Continuing...'
 fi
 
-echo -e "Compiling with -fstack-protector-strong and partial relro"
+if [ ~ -f 'linux-4.6.tar']
+    then
+        echo -e 'Decompressing the Linux source...'
+        xz -d 'linux4.6.tar.xz'
+fi
+
+echo -e 'Compiling with -fstack-protector-strong and partial relro'
 make clean
 CFLAGS='-Wl,-z,relro -fstack-protector-strong -D_FORTIFY_SOURCE=2' make
 # result destination folders are hardcoded in Run. We should sed in new paths
