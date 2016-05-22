@@ -27,3 +27,5 @@ Usage
 4. Run the script: ``./test-sec-flags.sh``
 
 All of the results will be output to test1.txt, test2.txt, and so on inside of the unixbench/UnixBench directory. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
+
+To plot your results, compile the system summaries as per the formats in ``datasets/<user>_[<device].txt`` and run ``python plot.py datasets/<foo>.txt`` from the project directory.
