@@ -28,7 +28,7 @@ cd "$localdir"
 echo -e "running ./configure"
 ./configure
 
-sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
+sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile debug/Makefile dos/Makefile lib/Makefile po/Makefile src/Makefile tests/Makefile
 
 # download something to compress
 if [ ! -f 'linux-4.6.tar.xz' ]
