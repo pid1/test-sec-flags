@@ -8,11 +8,13 @@ flags as the default compilation flags for Arch Linux packages.
 
 Requirements
 ------------
-- gcc
-- git
 
-Optional Requirements
----------------------
+- git, plus one of the following:
+
+For the Unixbench test (easiest):
+
+-gcc
+
 For plotting with plot.py:
 
 - python
