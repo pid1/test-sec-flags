@@ -2,15 +2,7 @@
 
 set -e
 
-results="$(pwd)/unixbench-results.txt"
-
-if [ ! -f 'unixbench-results.txt' ]
-    then
-        touch unixbench-results.txt
-    else
-        echo -e "Unixbench has already been cloned. Continuing..."
-fi
-
+resultsdir="$(pwd)/results"
 unixbenchrepo=https://github.com/kdlucas/byte-unixbench.git
 localdir=unixbench
 
@@ -36,7 +28,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 		CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	bash -c './Run' &> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test1-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 1 completed."
 fi
 
@@ -48,7 +40,7 @@ if [ -z "$1" ] || [ "2" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 2"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test2-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 2 completed."
 fi
 
@@ -60,7 +52,7 @@ if [ -z "$1" ] || [ "3" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test3-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 3 completed."
 fi
 
@@ -72,7 +64,7 @@ if [ -z "$1" ] || [ "4" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -fPIE' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test4-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 4 completed."
 fi
 
@@ -84,7 +76,7 @@ if [ -z "$1" ] || [ "5" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test5-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 5 completed."
 fi
 
@@ -96,7 +88,7 @@ if [ -z "$1" ] || [ "6" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fstack-check' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test6-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 6 completed."
 fi
 
@@ -108,7 +100,7 @@ if [ -z "$1" ] || [ "7" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test7-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 7 completed."
 fi
 
@@ -120,6 +112,6 @@ if [ -z "$1" ] || [ "8" == "$1" ]; then
 		CFLAGS='-pipe -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt -fstack-check' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> "$resultsdir"/unixbench-test8-`date +%Y-%m-%d.%H:%M:%S`
 	echo -e "Test 8 completed."
 fi

@@ -5,6 +5,7 @@ set -e
 results="$(pwd)/results/ffmpeg-results.txt"
 ffmpegurl='http://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2'
 ffmpegfile='ffmpeg-3.0.2.tar.bz2'
+inputfileurl='http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_stereo.avi'
 localdir='ffmpeg-3.0.2'
 pathdir="$(pwd)/.env/lib/hardening-wrapper/bin"
 JOBS=$(nproc||echo 1)
@@ -75,6 +76,8 @@ CONFIGURE_OPTIONS="--prefix='/usr'
     --enable-version3
     --enable-x11grab"
 
+curl -o input.avi "$inputfileurl"
+
 if [ -z "$1" ] || [ "1" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong and partial relro"
 	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
@@ -85,7 +88,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee $results
 	echo -e "Test 1 completed."
 fi
 
@@ -100,7 +103,7 @@ if [ -z "$1" ] || [ "2" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 2"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 2 completed."
 fi
 
@@ -115,7 +118,7 @@ if [ -z "$1" ] || [ "3" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 3 completed."
 fi
 
@@ -130,7 +133,7 @@ if [ -z "$1" ] || [ "4" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 4 completed."
 fi
 
@@ -145,7 +148,7 @@ if [ -z "$1" ] || [ "5" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 5 completed."
 fi
 
@@ -160,7 +163,7 @@ if [ -z "$1" ] || [ "6" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 6 completed."
 fi
 
@@ -175,7 +178,7 @@ if [ -z "$1" ] || [ "7" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 7 completed."
 fi
 
@@ -190,6 +193,6 @@ if [ -z "$1" ] || [ "8" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
+	./ffmpeg -benchmark -i input.avi -f null - |& tee -a $results
 	echo -e "Test 8 completed."
 fi
