@@ -30,3 +30,10 @@
 
 # Debug files
 *.dSYM/
+
+*.tar.bz2
+*.tar.gz
+ffmpeg-*/
+unixbench-results.txt
+unixbench/
+xz-*/
