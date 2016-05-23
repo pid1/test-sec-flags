@@ -5,6 +5,7 @@ set -e
 ffmpegurl='http://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2'
 ffmpegfile='ffmpeg-3.0.2.tar.bz2'
 localdir='ffmpeg-3.0.2'
+pathdir="$(pwd)/.env/lib/hardening-wrapper/bin"
 JOBS=$(nproc||echo 1)
 
 if [ ! -f "$ffmpegfile" ]
@@ -21,6 +22,13 @@ if [ ! -d "$localdir" ]
     else
         echo -e "ffmpeg alreday extracted. Continuing..."
 fi
+
+if [ ! -d "$pathdir" ]
+    then
+		echo -e "ERROR: pathdir does not exist, try 'make setup'"
+		exit 1
+fi
+
 
 cd "$localdir"
 
@@ -98,13 +106,13 @@ fi
 
 if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
-		CFLAGS='-fstack-protector-strong -pipe -O2 -fPIE' \
-		CXXFLAGS='-fstack-protector-strong -pipe -O2 -fPIE' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
+		CFLAGS='-fstack-protector-strong -pipe -O2 -fno-stack-check' \
+		CXXFLAGS='-fstack-protector-strong -pipe -O2 -fno-stack-check' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test3.txt
 	echo -e "Test 3 completed."
@@ -113,13 +121,13 @@ fi
 
 if [ -z "$1" ] || [ "4" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
-		CFLAGS='-fstack-protector-strong -fstack-check -fPIE -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fstack-check -fPIE -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
+		CFLAGS='-fstack-protector-strong -fstack-check -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fstack-check -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test4.txt
 	echo -e "Test 4 completed."
@@ -128,13 +136,13 @@ fi
 
 if [ -z "$1" ] || [ "5" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now' \
+		CFLAGS='-fstack-protector-strong -pipe -O2 -fno-stack-check' \
+		CXXFLAGS='-fstack-protector-strong -pipe -O2 -fno-stack-check' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test5.txt
 	echo -e "Test 5 completed."
@@ -143,13 +151,13 @@ fi
 
 if [ -z "$1" ] || [ "6" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -fstack-check -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -fstack-check -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now' \
+		CFLAGS='-fstack-protector-strong -fstack-check -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fstack-check -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test6.txt
 	echo -e "Test 6 completed."
@@ -158,13 +166,13 @@ fi
 
 if [ -z "$1" ] || [ "7" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -fno-plt -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -fno-plt -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now' \
+		CFLAGS='-fstack-protector-strong -fno-plt -pipe -O2 -fno-stack-check' \
+		CXXFLAGS='-fstack-protector-strong -fno-plt -pipe -O2 -fno-stack-check' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test7.txt
 	echo -e "Test 7 completed."
@@ -173,13 +181,13 @@ fi
 
 if [ -z "$1" ] || [ "8" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -fno-plt -fstack-check -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -fno-plt -fstack-check -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now' \
+		CFLAGS='-fstack-protector-strong -fno-plt -fstack-check -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fno-plt -fstack-check -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
-	make -j${JOBS}
+	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
 	./ffmpeg -benchmark -i input.mkv -f null - |& tee test8.txt
 	echo -e "Test 8 completed."

@@ -18,6 +18,7 @@ test-ffmpeg test-ffmpeg-1 test-ffmpeg-2 test-ffmpeg-3 test-ffmpeg-4 test-ffmpeg-
 setup: submodules
 	mkdir -p .env/lib/hardening-wrapper
 	make -C hardening-wrapper PREFIX=/ DESTDIR="$(shell pwd)/.env"
+	sed -r 's|/etc/hardening-wrapper.conf|/dev/null|g' -i .env/lib/hardening-wrapper/bin/*
 
 submodules:
 	git submodule update --init --rebase
