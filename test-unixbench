@@ -2,8 +2,7 @@
 
 set -e
 
-basedir=`pwd`
-results="$basedir/unixbench-results.txt"
+results="$(pwd)/unixbench-results.txt"
 
 if [ ! -f 'unixbench-results.txt' ]
     then
@@ -37,7 +36,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 		CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2' \
 		make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	bash -c './Run' &>> $results
+	bash -c './Run' &> $results
 	echo -e "Test 1 completed."
 fi
 

@@ -2,6 +2,7 @@
 
 set -e
 
+results="$(pwd)/results/ffmpeg-results.txt"
 ffmpegurl='http://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2'
 ffmpegfile='ffmpeg-3.0.2.tar.bz2'
 localdir='ffmpeg-3.0.2'
@@ -84,7 +85,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test1.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee $results
 	echo -e "Test 1 completed."
 fi
 
@@ -99,7 +100,7 @@ if [ -z "$1" ] || [ "2" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 2"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test2.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 2 completed."
 fi
 
@@ -114,7 +115,7 @@ if [ -z "$1" ] || [ "3" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test3.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 3 completed."
 fi
 
@@ -129,7 +130,7 @@ if [ -z "$1" ] || [ "4" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" HARDENING_BINDNOW=0 make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test4.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 4 completed."
 fi
 
@@ -144,7 +145,7 @@ if [ -z "$1" ] || [ "5" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test5.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 5 completed."
 fi
 
@@ -159,7 +160,7 @@ if [ -z "$1" ] || [ "6" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test6.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 6 completed."
 fi
 
@@ -174,7 +175,7 @@ if [ -z "$1" ] || [ "7" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test7.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 7 completed."
 fi
 
@@ -189,6 +190,6 @@ if [ -z "$1" ] || [ "8" == "$1" ]; then
 	make clean
 	PATH="${pathdir}:${PATH}" make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
-	./ffmpeg -benchmark -i input.mkv -f null - |& tee test8.txt
+	./ffmpeg -benchmark -i input.mkv -f null - |& tee -a $results
 	echo -e "Test 8 completed."
 fi

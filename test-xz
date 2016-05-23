@@ -2,8 +2,7 @@
 
 set -e
 
-basedir=`pwd`
-results="$basedir/xz-results.txt"
+results="$(pwd)/results/xz-results.txt"
 
 xzurl='http://tukaani.org/xz/xz-5.2.2.tar.gz'
 xzfile='xz-5.2.2.tar.gz'
