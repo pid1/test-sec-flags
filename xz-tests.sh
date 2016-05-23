@@ -8,6 +8,7 @@ results="$basedir/xz-results.txt"
 xzurl='http://tukaani.org/xz/xz-5.2.2.tar.gz'
 xzfile='xz-5.2.2.tar.gz'
 localdir='xz-5.2.2'
+JOBS=$(nproc||echo 1)
 
 if [ ! -f "$xzfile" ]
     then
@@ -55,7 +56,7 @@ fi
 if [ -z "$1" ] || [ "1" == "$1" ]; then
 	echo -e 'Compiling with -fstack-protector-strong and partial relro'
 	make clean
-	LDFLAGS='-Wl,-z,relro' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results 
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -66,7 +67,10 @@ fi
 if [ -z "$1" ] || [ "2" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and -fstack-check"
 	make clean
-	LDFLAGS='-Wl,-z,relro' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' make
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fstack-check' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 2"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -77,7 +81,7 @@ fi
 if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
 	make clean
-	LDFLAGS='-Wl,-z,relro' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -pie -fPIE' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -88,7 +92,7 @@ fi
 if [ -z "$1" ] || [ "4" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
 	make clean
-	LDFLAGS='-Wl,-z,relro -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -fPIE' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $reesults
@@ -99,7 +103,7 @@ fi
 if [ -z "$1" ] || [ "5" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 	make clean
-	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -110,7 +114,7 @@ fi
 if [ -z "$1" ] || [ "6" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
 	make clean
-	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fstack-check' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -121,7 +125,7 @@ fi
 if [ -z "$1" ] || [ "7" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
 	make clean
-	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
@@ -132,7 +136,7 @@ fi
 if [ -z "$1" ] || [ "8" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
 	make clean
-	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt -fstack-check' make
+	make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
 	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
