@@ -27,7 +27,8 @@ Usage
 
 1. Download: ``git clone https://github.com/pid1/test-sec-flags.git --recursive``
 2. cd into the project directory: ``cd test-sec-flags``
-3. Run the script: ``./test-<foo>``
+3. Setup everything thats needed: ``make setup``
+4. Run the script: ``./test-<foo>``
 
 Run a specific test case:
 
