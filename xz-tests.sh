@@ -25,6 +25,7 @@ if [ ! -d "$localdir" ]
         echo -e "xz already extracted. Continuing..."
 fi
 
+
 cd "$localdir"
 
 # download something to compress
@@ -54,7 +55,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee -a $results 
+	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee $results 
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 	echo -e "Test 1 completed."
 fi
