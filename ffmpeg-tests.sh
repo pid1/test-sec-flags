@@ -67,7 +67,7 @@ echo -e "running ./configure"
     --enable-version3 \
     --enable-x11grab
 
-if [ -z "$1" ] || [ "1" = "$1" ]; then
+if [ -z "$1" ] || [ "1" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong and partial relro"
 	make clean
 	LDFLAGS='-Wl,-z,relro' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2' make
@@ -79,7 +79,7 @@ if [ -z "$1" ] || [ "1" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "2" = "$1" ]; then
+if [ -z "$1" ] || [ "2" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and -fstack-check"
 	make clean
 	LDFLAGS='-Wl,-z,relro' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check' make
@@ -89,7 +89,7 @@ if [ -z "$1" ] || [ "2" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "3" = "$1" ]; then
+if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
 	make clean
 	LDFLAGS='-Wl,-z,relro -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' make
@@ -99,7 +99,7 @@ if [ -z "$1" ] || [ "3" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "4" = "$1" ]; then
+if [ -z "$1" ] || [ "4" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
 	make clean
 	LDFLAGS='-Wl,-z,relro -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fstack-check -fPIE' make
@@ -109,7 +109,7 @@ if [ -z "$1" ] || [ "4" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "5" = "$1" ]; then
+if [ -z "$1" ] || [ "5" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
 	make clean
 	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE' make
@@ -119,7 +119,7 @@ if [ -z "$1" ] || [ "5" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "6" = "$1" ]; then
+if [ -z "$1" ] || [ "6" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
 	make clean
 	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fstack-check' make
@@ -129,7 +129,7 @@ if [ -z "$1" ] || [ "6" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "7" = "$1" ]; then
+if [ -z "$1" ] || [ "7" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
 	make clean
 	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt' make
@@ -139,7 +139,7 @@ if [ -z "$1" ] || [ "7" = "$1" ]; then
 fi
 
 
-if [ -z "$1" ] || [ "8" = "$1" ]; then
+if [ -z "$1" ] || [ "8" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
 	make clean
 	LDFLAGS='-Wl,-z,relro,-z,now -pie' CFLAGS='-fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIE -fno-plt -fstack-check' make
