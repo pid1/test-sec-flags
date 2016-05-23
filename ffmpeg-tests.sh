@@ -98,9 +98,9 @@ fi
 
 if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -pipe -O2 -fPIE -pie' \
-		CXXFLAGS='-fstack-protector-strong -pipe -O2 -fPIE -pie' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
+		CFLAGS='-fstack-protector-strong -pipe -O2 -fPIE' \
+		CXXFLAGS='-fstack-protector-strong -pipe -O2 -fPIE' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
@@ -113,9 +113,9 @@ fi
 
 if [ -z "$1" ] || [ "4" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -fstack-check -fPIE -pie -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fstack-check -fPIE -pie -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
+		CFLAGS='-fstack-protector-strong -fstack-check -fPIE -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fstack-check -fPIE -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
@@ -128,9 +128,9 @@ fi
 
 if [ -z "$1" ] || [ "5" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -pie -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -pie -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -fPIE -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fPIE -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
@@ -143,9 +143,9 @@ fi
 
 if [ -z "$1" ] || [ "6" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -pie -fstack-check -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -pie -fstack-check -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -fPIE -fstack-check -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fPIE -fstack-check -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
@@ -158,9 +158,9 @@ fi
 
 if [ -z "$1" ] || [ "7" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -pie -fno-plt -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -pie -fno-plt -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -fPIE -fno-plt -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fPIE -fno-plt -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
@@ -173,9 +173,9 @@ fi
 
 if [ -z "$1" ] || [ "8" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -fPIE -pie' \
-		CFLAGS='-fstack-protector-strong -fPIE -pie -fno-plt -fstack-check -pipe -O2' \
-		CXXFLAGS='-fstack-protector-strong -fPIE -pie -fno-plt -fstack-check -pipe -O2' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -fPIE -fno-plt -fstack-check -pipe -O2' \
+		CXXFLAGS='-fstack-protector-strong -fPIE -fno-plt -fstack-check -pipe -O2' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' \
 		./configure ${CONFIGURE_OPTIONS}
 	make clean
