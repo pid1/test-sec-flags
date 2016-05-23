@@ -31,9 +31,11 @@
 # Debug files
 *.dSYM/
 
+# project related files
 *.tar.bz2
 *.tar.gz
 ffmpeg-*/
-unixbench-results.txt
+*-results.txt
 unixbench/
 xz-*/
+.env/

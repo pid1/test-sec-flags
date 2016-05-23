@@ -1,0 +1,3 @@
+[submodule "hardening-wrapper"]
+	path = hardening-wrapper
+	url = https://github.com/thestinger/hardening-wrapper

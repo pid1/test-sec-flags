@@ -55,7 +55,7 @@ if [ -z "$1" ] || [ "1" == "$1" ]; then
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
-	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee $results 
+	bash -c 'time src/xz/xz --compress --stdout linux-4.6.tar > /dev/null' |& tee $results
 	bash -c 'time src/xz/xz --decompress --stdout linux-4.6.tar.xz > /dev/null' |& tee -a $results
 	echo -e "Test 1 completed."
 fi
@@ -77,8 +77,8 @@ fi
 
 if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
-	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
-		CFLAGS='-fstack-protector-strong -O2 -pipe -pie -fPIE' \
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fPIE' \
 		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
