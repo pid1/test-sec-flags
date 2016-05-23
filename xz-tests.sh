@@ -26,13 +26,6 @@ if [ ! -d "$localdir" ]
 fi
 
 cd "$localdir"
-echo -e "running ./configure"
-./configure
-
-sed 's/^CFLAGS = -g -O2/CFLAGS += -g -O2/g' -i Makefile
-
-sed 's/^LDFLAGS =/LDFLAGS += /g' -i Makefile
-
 
 # download something to compress
 if [ ! -f 'linux-4.6.tar.xz' ]
@@ -55,6 +48,9 @@ fi
 
 if [ -z "$1" ] || [ "1" == "$1" ]; then
 	echo -e 'Compiling with -fstack-protector-strong and partial relro'
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 1"
@@ -80,6 +76,9 @@ fi
 
 if [ -z "$1" ] || [ "3" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, and PIE"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -pie -fPIE' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 3"
@@ -91,6 +90,9 @@ fi
 
 if [ -z "$1" ] || [ "4" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, partial relro, PIE, and -fstack-check"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fstack-check -fPIE' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 4"
@@ -102,6 +104,9 @@ fi
 
 if [ -z "$1" ] || [ "5" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fPIE' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 5"
@@ -113,6 +118,9 @@ fi
 
 if [ -z "$1" ] || [ "6" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fstack-check"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fPIE -fstack-check' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 6"
@@ -124,6 +132,9 @@ fi
 
 if [ -z "$1" ] || [ "7" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fPIE -fno-plt' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 7"
@@ -135,6 +146,9 @@ fi
 
 if [ -z "$1" ] || [ "8" == "$1" ]; then
 	echo -e "Compiling with -fstack-protector-strong, full relro, PIE, -fno-plt, and -fstack-check"
+	LDFLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie' \
+		CFLAGS='-fstack-protector-strong -O2 -pipe -fPIE -fno-plt -fstack-check' \
+		CPPFLAGS='-D_FORTIFY_SOURCE=2' ./configure --disable-rpath --prefix=/usr
 	make clean
 	make -j${JOBS}
 	echo -e "Compilation finished, running test 8"
