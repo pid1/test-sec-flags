@@ -25,7 +25,7 @@ For plotting with plot.py:
 Usage
 -----
 
-1. Download: ``git clone https://github.com/pid1/test-sec-flags.git``
+1. Download: ``git clone https://github.com/pid1/test-sec-flags.git --recursive``
 2. cd into the project directory: ``cd test-sec-flags``
 3. Run the script: ``./<foo>-tests.sh``
 
