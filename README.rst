@@ -47,3 +47,12 @@ Makefile overlay:
 Raw results from each test are output to ``results`` in a timestamped file. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
 
 To plot your results, compile the system summaries as per the formats in ``datasets/<user>[_<device].txt`` and run ``python plot.py <results file>``.
+
+Expected Runtimes
+-----------------
+
+Unixbench: 30 minutes per test, 4 hours total (Does not vary on different hardware, due to the nature of the test).
+
+xz: On an i5-4440@3.1GHz, ~5 minutes per run, 40 minutes total
+
+ffmpeg: On an i5-4440@3.1GHz, ~3 minutes per run, 20 minutes total
