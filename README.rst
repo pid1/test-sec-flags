@@ -12,9 +12,13 @@ Requirements
 - git
 - coreutils
 
-For the test suites:
+For the xz and unixbench test suites:
 
 - gcc
+
+For ffmpeg:
+
+- See the ffmpeg PKGBUILD
 
 For plotting:
 
@@ -40,6 +44,6 @@ Makefile overlay:
 - invole all test cases of a suite: ``make test-unixbench``
 - invole specific test cases of a suite: ``make test-unixbench-5``
 
-Raw results from each test are output to ``results/<foo>-results.txt``. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
+Raw results from each test are output to ``results`` in a timestamped file. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
 
 To plot your results, compile the system summaries as per the formats in ``datasets/<user>[_<device].txt`` and run ``python plot.py <results file>``.
