@@ -4,7 +4,7 @@ test-sec-flags
 ``test-sec-flags`` is a small collection of scripts intended to automate testing the
 performance impact of various security-oriented compilation and linking flags. The goal
 is to determine if the performance impact is small enough to allow for using these
-flags as the default compilation flags for all Arch Linux packages.
+flags as the default flags for all Arch Linux packages.
 
 Requirements
 ------------
