@@ -44,7 +44,7 @@ Makefile overlay:
 - Invoke all test cases of a suite: ``make test-unixbench``
 - Invoke specific test cases of a suite: ``make test-unixbench-5``
 
-Raw results from each test are output to ``results`` in a timestamped file. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki.
+Raw results from each test are output to ``results`` in a timestamped file. Summary results for other users can be viewed at https://github.com/pid1/test-sec-flags/wiki. Please add your results to the wiki as well, preferably maintaining the same format as the results already there.
 
 To plot your results, compile the system summaries as per the formats in ``datasets/<user>[_<device].txt`` and run ``python plot.py <results file>``.
 
