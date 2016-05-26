@@ -15,7 +15,19 @@ test-xz test-xz-1 test-xz-2 test-xz-3 test-xz-4 test-xz-5 test-xz-6 test-xz-7 te
 test-ffmpeg test-ffmpeg-1 test-ffmpeg-2 test-ffmpeg-3 test-ffmpeg-4 test-ffmpeg-5 test-ffmpeg-6 test-ffmpeg-7 test-ffmpeg-8: setup
 	${FFMPEG} $(subst test-ffmpeg,,$(@:test-ffmpeg-%=%))
 
-setup: submodules
+check-env:
+	@if [[ "$$PATH" = *"ccache"* ]] || [[ "$$PATH" = *"colorgcc"* ]]; then \
+		echo ""; \
+		echo "============================================="; \
+		echo 'ERROR: Found a gcc wrapper in $$PATH, please'; \
+		echo '       make sure to remove all wrappers'; \
+		echo '       before executing the tests'; \
+		echo "============================================="; \
+		echo ""; \
+		exit 1; \
+	fi
+
+setup: submodules check-env
 	mkdir -p .env/lib/hardening-wrapper
 	make -C hardening-wrapper PREFIX=/ DESTDIR="$(shell pwd)/.env"
 	sed -r 's|/etc/hardening-wrapper.conf|/dev/null|g' -i .env/lib/hardening-wrapper/bin/*
