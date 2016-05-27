@@ -51,7 +51,7 @@ To plot your results, compile the system summaries as per the formats in ``datas
 Expected Runtimes
 -----------------
 
-Unixbench: 30 minutes per test, 4 hours total (Does not vary on different hardware, due to the nature of the test).
+Unixbench: ~30-45 minutes per test, 4-6 hours
 
 xz: On an i5-4440@3.1GHz, ~5 minutes per run, 40 minutes total
 
