@@ -30,9 +30,9 @@ Usage
 -----
 
 Make sure that your $PATH does not contain any gcc wrappers like ccache or colorgcc
-before executing the test suites as it may result in problems like infitie loops.
-We highly recommend to use this test suite inside a clean chroot to avoid possible
-issues and interfering setups with the environment.
+before executing the test suites, as it may result in problems like unbounded loops.
+We highly recommend to use this test suite inside a clean chroot or a clean virtual
+machine image to avoid interfering setups.
 
 1. Download: ``git clone https://github.com/pid1/test-sec-flags.git --recursive``
 2. cd into the project directory: ``cd test-sec-flags``
