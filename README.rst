@@ -14,7 +14,7 @@ Requirements
 
 For the xz and unixbench test suites:
 
-- gcc
+- gcc ``Please take a look at the usage section``
 
 For ffmpeg:
 
@@ -28,6 +28,11 @@ For plotting:
 
 Usage
 -----
+
+Make sure that your $PATH does not contain any gcc wrappers like ccache or colorgcc
+before executing the test suites as it may result in problems like infitie loops.
+We highly recommend to use this test suite inside a clean chroot to avoid possible
+issues and interfering setups with the environment.
 
 1. Download: ``git clone https://github.com/pid1/test-sec-flags.git --recursive``
 2. cd into the project directory: ``cd test-sec-flags``
