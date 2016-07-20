@@ -18,7 +18,9 @@ For the xz and unixbench test suites:
 
 For ffmpeg:
 
-- See the ffmpeg PKGBUILD
+- See `the ffmpeg PKGBUILD`_
+
+.. _the ffmpeg PKGBUILD: https://git.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/ffmpeg
 
 For plotting:
 
