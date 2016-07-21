@@ -58,8 +58,8 @@ To plot your results, compile the system summaries as per the formats in ``datas
 Expected Runtimes
 -----------------
 
-Unixbench: ~30-45 minutes per test, 4-6 hours
+Unixbench: ~30-45 minutes per test, 4-6 hours (1 / ~8 hours on atom n450)
 
-xz: On an i5-4440@3.1GHz, ~5 minutes per run, 40 minutes total
+xz: On an i5-4440@3.1GHz, ~5 minutes per run, 40 minutes total (~22' / 3 hours on atom n450)
 
-ffmpeg: On an i5-4440@3.1GHz, ~3 minutes per run, 20 minutes total
+ffmpeg: On an i5-4440@3.1GHz, ~3 minutes per run, 20 minutes total (~1 / 8 hours on atom n450)
