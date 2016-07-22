@@ -67,5 +67,5 @@ On an i5-4440@3.1GHz, about 5 minutes per run, 40 minutes total
 On an Atom N450, about 22 minutes per test, 3 hours total
 
 ffmpeg: 
-On an i5-4440@3.1GHz, ~3 minutes per run, 20 minutes total
+On an i5-4440@3.1GHz, about 3 minutes per run, 20 minutes total
 On an Atom N450, about 1 hour per run, 8 hours total
