@@ -3,10 +3,10 @@
 set -e
 
 resultsdir="$(pwd)/results"
-ffmpegurl='http://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2'
-ffmpegfile='ffmpeg-3.0.2.tar.bz2'
+ffmpegurl='http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.bz2'
+ffmpegfile='ffmpeg-3.1.1.tar.bz2'
 inputfileurl='http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_stereo.avi'
-localdir='ffmpeg-3.0.2'
+localdir='ffmpeg-3.1.1'
 pathdir="$(pwd)/.env/lib/hardening-wrapper/bin"
 JOBS=$(nproc||echo 1)
 
@@ -41,12 +41,12 @@ CONFIGURE_OPTIONS="--prefix='/usr'
     --enable-avisynth
     --enable-avresample
     --enable-fontconfig
+    --enable-gmp
     --enable-gnutls
     --enable-gpl
     --enable-ladspa
     --enable-libass
     --enable-libbluray
-    --enable-libdcadec
     --enable-libfreetype
     --enable-libfribidi
     --enable-libgsm
