@@ -55,6 +55,16 @@ Raw results from each test are output to ``results`` in a timestamped file. Summ
 
 To plot your results, compile the system summaries as per the formats in ``datasets/<user>[_<device].txt`` and run ``python plot.py <results file>``.
 
+Issues
+------
+
+If you encounter bugs, please open an issue on the bugtracker. Ensure that you have installed all of the necessary dependencies and makedeps, and that you are running this in a clean chroot or virtual machine.
+
+Feature Requests and Enhancements
+---------------------------------
+
+Feature requests and suggested enhancements should be added to https://github.com/pid1/test-sec-flags/wiki/Feature-Requests
+
 Expected Runtimes
 -----------------
 
