@@ -10,7 +10,9 @@ Current Status
 --------------
 A huge thank you to everyone who contributed to this effort. As per Allan's post
 on the mailing list, we will be implementing these flags in Arch. 
+
 https://lists.archlinux.org/pipermail/arch-dev-public/2016-October/028405.html
+
 Please follow the mailing list for news on future developments.
 
 Requirements
